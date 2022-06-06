@@ -80,8 +80,25 @@
                 var temp = $(this).text()
                 total += parseInt(temp)
             });
-            $("#totalsalarys").text(total)
+            $("#totalsalarys").text($("#totalsalarys").text()+total)
         });
+    </script>
+    <script>
+        var rentalrev = 0;
+        $(".totalrental").each(function(){
+            var rentalsalary = $(this).text()
+            rentalrev += parseInt(rentalsalary)
+        });
+        $(".rentalrevenue").text(rentalrev)
+
+        var soldrev = 0;
+        $(".totalsold").each(function(){
+            var soldsalary = $(this).text()
+            soldrev += parseInt(soldsalary)
+        });
+        $(".soldrevenue").text(soldrev)
+
+        
     </script>
     <!--<script src="{% static 'dist/js/pages/dashboard3.js'"></script>
 -->
@@ -122,7 +139,7 @@
                     labels: [
 
 
-                        'تفاصيل الارباح',
+                        'Earnings details',
 
                     ],
 
@@ -132,14 +149,14 @@
                             backgroundColor: '#007bff',
                             borderColor: '#007bff',
                             data: [
-                                '50',
+                                $(".soldrevenue").text()
                             ]
                         },
                         {
                             backgroundColor: '#ced4da',
                             borderColor: '#ced4da',
                             data: [
-                                '30',
+                                $(".rentalrevenue").text()
                             ]
                         }
                     ]

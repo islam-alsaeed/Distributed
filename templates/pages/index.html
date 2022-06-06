@@ -46,18 +46,39 @@
                                 {% endif %}
                             {% endif %}
                     {% endfor %}
+                    
+                    <!-- Borrowed books -->
+                    {% for book in books %}
+                    {% if book.status == 'rented' %}
+                    {% if book.total_rental != None %}
+                    <p class="totalrental" hidden >{{book.total_rental}}</p>
+                    {% endif %}
+                    {% endif %}
+                    {% endfor %}
+                    <p class="rentalrevenue" hidden >{{book.total_rental}}</p>
+
+                    <!-- sold book -->
+                    {% for book in books %}
+                    {% if book.status == 'sold' %}
+                    {% if book.price != None %}
+                    <p class="totalsold" hidden >{{book.price}}</p>
+                    {% endif %}
+                    {% endif %}
+                    {% endfor %}
+                    <p class="soldrevenue" hidden ></p>
+
                     <div class="col-lg-6">
                         <div class="card">
                             <div class="card-header border-0">
                                 <div class="d-flex justify-content-between">
-                                    <h3 class="card-title">revenu</h3>
+                                    <h3 class="card-title">revenue</h3>
                                 </div>
                             </div>
                             
                             <div class="card-body">
                                 <div class="d-flex">
                                     <p class="d-flex flex-column">
-                                        <span id="totalsalarys" class="text-bold text-lg"></span><br>
+                                        <span id="totalsalarys" class="text-bold text-lg">$</span><br>
                                     </p>
                                 </div>
                                 <!-- /.d-flex -->
@@ -86,7 +107,7 @@
 
                 <!-- form add books -->
                 <div class="row m-1 mb-3">
-                    <a href="#bookform" class="btn btn-primary" data-toggle="collapse">+ اضافة كتاب</a>
+                    <a href="#bookform" class="btn btn-primary" data-toggle="collapse">add book +</a>
                 </div>
 
                 <div id="bookform" class="card card-primary collapse">
@@ -102,7 +123,7 @@
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-primary">اضافة</button>
+                            <button type="submit" class="btn btn-primary">add</button>
                         </div>
                     </form>
                 </div>
