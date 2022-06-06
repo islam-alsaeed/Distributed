@@ -68,7 +68,21 @@
 
         {% endfor %}
     </script>
-    
+    <script>
+        $("#rentaldays").keyup(function(){
+            $("#totalrental").val($("#rentaldays").val()*$("#rentalprice").val())
+        });
+    </script>
+    <script>
+        $(document).ready(function(){
+            var total = 0;
+            $('.totalprice').each(function(){
+                var temp = $(this).text()
+                total += parseInt(temp)
+            });
+            $("#totalsalarys").text(total)
+        });
+    </script>
     <!--<script src="{% static 'dist/js/pages/dashboard3.js'"></script>
 -->
 
