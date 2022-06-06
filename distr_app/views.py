@@ -1,4 +1,4 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from .models import *
 from .forms import *
 # Create your views here.
@@ -24,9 +24,15 @@ def index(request):
     return render(request,'pages/index.html',context)
 
 def books(request):
+    search = Book.objects.all()
+    title = None
+    if 'search_name' in request.POST:
+        title = request.POST['search_name']
+        if title:
+            search = search.filter(title__icontains=title)
     context = {
         'categories': Category.objects.all(),
-        'books':Book.objects.all(),
+        'books':search,
     }
     return render(request,'pages/books.html',context)
 
@@ -44,5 +50,9 @@ def update(request,id):
     }
     return render(request,'pages/update.html',context)
 
-# def delete(request):
-#     return render(request,'pages/delete.html')
+def delete(request,id):
+    delete_book = get_object_or_404(Book,id=id)
+    if request.method == 'POST':
+        delete_book.delete()
+        return redirect('/')
+    return render(request,'pages/delete.html')
