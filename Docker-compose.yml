@@ -1,0 +1,17 @@
+version: "3.9"
+services:
+    django:
+        build: . 
+        container_name: Distributed
+        command: python manage.py runserver 0.0.0.0:8000
+        volumes:
+          - .:/project
+        ports:
+          - "8000:8000"
+        depends_on:
+            - dbsqlite3
+    dbsqlite3:
+      image: nouchka/sqlite3:latest
+      container_name: dbsqlite3
+      environment:
+          - SQLITE3_DB=db.sqlite3
